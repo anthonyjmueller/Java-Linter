@@ -1,6 +1,13 @@
+import jdk.nashorn.internal.runtime.regexp.RegExp;
+import jdk.nashorn.internal.runtime.regexp.joni.Regex;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static jdk.nashorn.internal.runtime.regexp.RegExp.*;
 
 
 public class Linter {
@@ -19,9 +26,14 @@ public class Linter {
                 whitespace = false;
                 String line = code.nextLine();
                 if (line.length() != 0){
-                    String last = line.substring(line.length()-1, line.length());
-                    //System.out.println(last.length() + last);
-                    check(last, line, linecnt);
+                    System.out.println(linecnt);
+                    Pattern curr = Pattern.compile(".*[{$|}$|;$]+");
+                    Boolean test = true;
+                    Matcher end = curr.matcher(line);
+                    test = end.find();
+                    if (!(test)){
+                        System.out.println(linecnt + ". Statement should end with a semicolon.");
+                    }
                 }
                 linecnt++;
                 if (whitespace){
@@ -37,43 +49,5 @@ public class Linter {
         }
 
     }
-
-    private static void check(String last, String line, int linecnt) {
-        int casenum = 0;
-        if (last.equals("{"))
-            casenum = 1;
-        else if (last.equals("}"))
-            casenum = 1;
-        else if (last.equals("{"))
-            casenum = 1;
-        else if (last.equals(";"))
-            casenum = 1;
-        else if (last.equals(")"))
-            casenum = 1;
-        else if (last.equals(" "))
-            casenum = 2;
-        else
-            System.out.println(linecnt + ". Statement should end with a semicolon.");
-
-
-        switch (casenum)
-        {
-
-            case 1 :
-                break;
-            case 2 :
-                last = line.substring(line.length()-2, line.length()-1);
-                //System.out.println(line.length());
-                if (line.length() != 0){
-                    line = line.substring(0, line.length()-1);
-                }
-                //System.out.println(line.length());
-                whitespace = true;
-                check(last, line, linecnt);
-                break;
-
-        }
-
-    }
-
+    
 }
