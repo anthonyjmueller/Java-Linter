@@ -21,33 +21,26 @@ public class Linter {
         try {
             Scanner code = new Scanner(program);
 
-            while (code.hasNextLine())
-            {
-                whitespace = false;
+            while (code.hasNextLine()) {
                 String line = code.nextLine();
-                if (line.length() != 0){
+                if (line.length() != 0) {
                     System.out.println(linecnt);
                     Pattern curr = Pattern.compile(".*[{$|}$|;$]+");
                     Boolean test = true;
                     Matcher end = curr.matcher(line);
                     test = end.find();
-                    if (!(test)){
+                    if (!(test)) {
                         System.out.println(linecnt + ". Statement should end with a semicolon.");
                     }
                 }
                 linecnt++;
-                if (whitespace){
-                    System.out.println(linecnt + ". Statement contains trailing white space");
-                }
 
             }
-
-
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
     }
-    
+
 }
