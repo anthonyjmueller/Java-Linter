@@ -26,11 +26,18 @@ public class Linter {
                 if (line.length() != 0) {
                     System.out.println(linecnt);
                     Pattern curr = Pattern.compile(".*[{$|}$|;$]+");
-                    Boolean test = true;
+                    Pattern whit = Pattern.compile(".*\\s+$");
+
                     Matcher end = curr.matcher(line);
-                    test = end.find();
-                    if (!(test)) {
+                    Boolean semi = end.find();
+                    if (!(semi)) {
                         System.out.println(linecnt + ". Statement should end with a semicolon.");
+                    }
+
+                    Matcher trawhite = whit.matcher(line);
+                    Boolean white = trawhite.find();
+                    if (white){
+                        System.out.println(linecnt + ". Statement contains trailing white space");
                     }
                 }
                 linecnt++;
