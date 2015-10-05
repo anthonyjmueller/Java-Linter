@@ -24,7 +24,7 @@ public class Linter {
             while (code.hasNextLine()) {
                 String line = code.nextLine();
                 if (line.length() != 0) {
-                    System.out.println(linecnt);
+                    //System.out.println(linecnt);
                     Pattern curr = Pattern.compile(".*[{$|}$|;$]+");
                     Pattern whit = Pattern.compile(".*\\s+$");
 
@@ -39,15 +39,38 @@ public class Linter {
                     if (white){
                         System.out.println(linecnt + ". Statement contains trailing white space");
                     }
+
+                    Pattern bractestO = Pattern.compile("[{]+");
+                    Matcher bractestOM = bractestO.matcher(line);
+                    if (bractestOM.find()) {
+                        //System.out.println(linecnt);
+                        Pattern open = Pattern.compile("[[\\p{Alpha}][\\p{Digit}][\\p{Punct}]]+[\\p{Blank}]*[{]");
+
+                        Matcher openm = open.matcher(line);
+                        Boolean openb = openm.find();
+                        //System.out.println(openb);
+                        if (!(openb)) {
+                            System.out.println(linecnt + ". Open curley braces should not stand-alone.");
+                        }
+                    }
+
+                    Pattern bractestC = Pattern.compile("[}]+");
+                    Matcher bractestCM = bractestC.matcher(line);
+                    if (bractestCM.find()) {
+                        Pattern close = Pattern.compile("[[\\p{Alpha}][\\p{Digit}][\\p{Punct}]]+[\\p{Blank}]*[}]");
+
+                        Matcher closem = close.matcher(line);
+                        Boolean closeb = closem.find();
+                        if (closeb) {
+                            System.out.println(linecnt + ". Closing curly braces should stand-alone.");
+                        }
+                    }
                 }
                 linecnt++;
-
             }
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 
 }
