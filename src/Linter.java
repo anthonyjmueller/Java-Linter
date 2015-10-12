@@ -54,6 +54,20 @@ public class Linter {
                         }
                     }
 
+                    Pattern strictequ = Pattern.compile(".*[=]{2}+");
+                    Matcher strictequs = strictequ.matcher(line);
+                    if (strictequs.find()) {
+                        //System.out.println(linecnt);
+                        Pattern strict = Pattern.compile(".*[=]{3}+");
+
+                        Matcher stricte = strict.matcher(line);
+                        Boolean equalsthree = stricte.find();
+                        //System.out.println(openb);
+                        if (!(equalsthree)) {
+                            System.out.println(linecnt + ". Should only use strict equal.");
+                        }
+                    }
+
                     Pattern bractestC = Pattern.compile("[}]+");
                     Matcher bractestCM = bractestC.matcher(line);
                     if (bractestCM.find()) {
