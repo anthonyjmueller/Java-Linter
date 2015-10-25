@@ -24,9 +24,15 @@ public class Linter {
             while (code.hasNextLine()) {
                 String line = code.nextLine();
                 if (line.length() != 0) {
+
+                    if (line.length() > 80){
+                        System.out.println(linecnt + ". Line Should not be longer than 80 characters.");
+                    }
                     //System.out.println(linecnt);
                     Pattern curr = Pattern.compile(".*[{$|}$|;$]+");
                     Pattern whit = Pattern.compile(".*\\s+$");
+                    Pattern dquores = Pattern.compile(".*[']{2}");
+                    Pattern singlestatement = Pattern.compile(".*[;]{1}[{\\p{Alpha}\\p{N}}\\p{Punct}}]*+");
 
                     Matcher end = curr.matcher(line);
                     Boolean semi = end.find();
@@ -38,6 +44,18 @@ public class Linter {
                     Boolean white = trawhite.find();
                     if (white){
                         System.out.println(linecnt + ". Statement contains trailing white space");
+                    }
+
+                    Matcher dquote = dquores.matcher(line);
+                    Boolean ifdquoates = dquote.find();
+                    if (ifdquoates){
+                        System.out.println(linecnt + ". Should use single quotes");
+                    }
+
+                    Matcher singlestatem = singlestatement.matcher(line);
+                    Boolean singlestate = singlestatem.find();
+                    if (singlestate){
+                        System.out.println(linecnt + ". Use only one statement per line");
                     }
 
                     Pattern bractestO = Pattern.compile("[{]+");
