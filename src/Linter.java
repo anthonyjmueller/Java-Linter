@@ -104,5 +104,4 @@ public class Linter {
             e.printStackTrace();
         }
     }
-
 }
