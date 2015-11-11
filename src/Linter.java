@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static jdk.nashorn.internal.runtime.regexp.RegExp.*;
-
+// add ingore for comments and add catch for new line character
 
 public class Linter {
 
@@ -32,7 +32,7 @@ public class Linter {
                     Pattern curr = Pattern.compile(".*[{$|}$|;$]+");
                     Pattern whit = Pattern.compile(".*\\s+$");
                     Pattern dquores = Pattern.compile(".*[']{2}");
-                    Pattern singlestatement = Pattern.compile(".*[;]{1}[{\\p{Alpha}\\p{N}}\\p{Punct}}]*+");
+                    Pattern singlestatement = Pattern.compile(".*[;]{1}[{\\p{Alpha}\\p{N}}\\p{Punct}}]{1}+");
 
                     Matcher end = curr.matcher(line);
                     Boolean semi = end.find();
