@@ -1,0 +1,18 @@
+ if (true) {
+	var y
+	var x;
+
+	if (var == y){
+
+while (ver === z){
+//hdfisoa;hfdklsak {}{}{}{
+}
+    }
+    when
+/*
+    ''howershdjkl''
+    heiwoheior; gafhdisoahf;
+*/
+    {
+    var = x }
+//hdfisoa;hfdklsak {}{}{}{
