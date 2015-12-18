@@ -23,13 +23,21 @@ public class Linter {
             Scanner code = new Scanner(program);
 
             while (code.hasNextLine()) {
-                String line = code.nextLine();
-                if (line.length() != 0) {
+                String line;
+                if (code.hasNextLine()) {
+                    line = code.nextLine();
+                }
+                else {
+                    line = code.next();
+                }
 
+
+                if (line.length() != 0) {
                     if (!(code.hasNextLine())) {
                         Pattern newlinelast = Pattern.compile(".{0}\\n");
                         Matcher newlinelas = newlinelast.matcher(line);
                         Boolean linelast = newlinelas.find();
+                        System.out.print(line);
                         if (!(linelast)) {
                             System.out.println("Program should end with an blank line.");
                         }
@@ -53,7 +61,7 @@ public class Linter {
                         Pattern curr = Pattern.compile(".*[{$|}$|;$]+");
                         Pattern whit = Pattern.compile(".*\\s+$");
                         Pattern dquores = Pattern.compile(".*[']{2}");
-                        Pattern singlestatement = Pattern.compile(".*[;]{1}[{\\p{Alpha}\\p{N}}\\p{Punct}}]{1}+");
+                        Pattern singlestatement = Pattern.compile(".*\\;{1}[\\p{Alpha}\\p{Digit}\\p{Punct}]{1}+");
 
                         Matcher end = curr.matcher(line);
                         Boolean semi = end.find();
@@ -82,12 +90,10 @@ public class Linter {
                         Pattern bractestO = Pattern.compile("[{]+");
                         Matcher bractestOM = bractestO.matcher(line);
                         if (bractestOM.find()) {
-                            //System.out.println(linecnt);
-                            Pattern open = Pattern.compile("[[\\p{Alpha}][\\p{Digit}][\\p{Punct}]]+[\\p{Blank}]*[{]");
+                            Pattern open = Pattern.compile("[\\p{Alpha}\\p{Punct}\\p{Digit}]{1}+[\\p{Blank}]*\\{");
 
                             Matcher openm = open.matcher(line);
                             Boolean openb = openm.find();
-                            //System.out.println(openb);
                             if (!(openb)) {
                                 System.out.println(linecnt + ". Open curley braces should not stand-alone.");
                             }

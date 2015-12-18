@@ -1,3 +1,45 @@
+// test 1
+var x;
+var y
+var y; var x;
+
+// test 2
+
+var x;     
+
+// test 3
+
+var bhlea {
+}
+
+{
+}
+
+}
+afhdahgksdlh {}
+
+// test 4
+
+var y === s;
+var z == x
+
+var z == j;
+
+
+// test 5
+
+''howershdjkl'';
+"here is text";
+
+
+// test 6
+
+var x; vary;
+var xz;
+
+
+//old test file
+/*
  if (true) {
 	var y
 	var x;
@@ -9,10 +51,10 @@ while (ver === z){
 }
     }
     when
-/*
     ''howershdjkl''
     heiwoheior; gafhdisoahf;
-*/
     {
     var = x }
 //hdfisoa;hfdklsak {}{}{}{
+*/
+
